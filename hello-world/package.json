@@ -1,0 +1,14 @@
+{
+  "name":"hello-world",
+  "version":"0.0.0",
+  "description":"Very basic hello world project for starting to learn MEAN",
+  "main":"server.js",
+  "author":"Taylor Handy",
+  "dependencies":{
+    "body-parser":"latest",
+    "express":"latest",
+    "method-override":"latest",
+    "mongoose":"latest",
+    "morgan":"latest"
+  }
+}
