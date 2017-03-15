@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ng-app="store">
+  <head>
+
+    <!-- CSS  -->
+    <link rel="stylesheet" type="text/css" href="libs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+
+    <!-- JS -->
+    <script type="text/javascript" src="libs/angular/angular.min.js"></script>
+    <script type="text/javascript" src="libs/angular-route/angular-route.min.js" charset="utf-8"></script>
+
+    <!-- Custom Angular JS -->
+    <script src="js/app.js" charset="utf-8"></script>
+
+    <meta charset="utf-8">
+    <title>Home</title>
+  </head>
+  <!-- ng-controller is the directive telling angular that this div has a controller -->
+  <!-- StoreController is the name of the controller to add to this tag -->
+  <!-- "as" is a keyword that tells angular to refer StoreController as store -->
+  <body ng-controller="StoreController as store">
+
+    <!-- ng-repeat repeats the nested tags based on an iteration -->
+    <!-- in this case ng-repeat is being iterated over the store.products array -->
+    <!-- product is a variable you can use inside the ng-repeat tags for each element in the array -->
+    <div ng-repeat="product in store.products">
+
+    <!-- ng-hide hides the tag if the value given is true -->
+    <div ng-hide="product.soldOut">
+      <h1> {{product.name}} </h1>
+      <!-- "|" is a pipe meaning it is taking the result of the first expression and using it for the second expression -->
+      <!-- In this case that means the value for product.price is being used as a parameter for the currency filter -->
+      <!-- currency is a built in angurlar filter that modifies the piped in value to display like currency e.g. $2 becomes $2.00 -->
+      <!-- Recipe for filters: {{data* | filter:option*}} where options are the different choices available for the filter -->
+      <!-- E.g. Date: {{'1388123412323' | date:'MM/dd/yyyy @ h:mma'}} -> 12/27/2013 @ 12:50AM -->
+
+      <!-- limitTo filter allows you to limit the characters to display or how many elements to display in an array -->
+      <!-- E.g. <li ng-repeat="product in store.products | limitTo:3">
+        would repeat the li tag for only the first three items in the array
+      -->
+
+      <!-- orderBy filter allows you to sort the value being passed in
+          E.g <li ng-repeat="product in store.products | orderBy:'-price'">
+
+          would display the products in descending order by price
+     -->
+      <h2> ${{product.price | currency}}</h2>
+      <p> {{product.description}}</p>
+
+      <!-- ng-show shows the tag only if the value given is true -->
+      <button ng-show="product.canPurchase">Add To Cart</button>
+
+
+      <!-- Since img tags require a src attribute, but that attribute is rendered before expressions
+          are evaluated instead we need to use the ng-src directive
+        E.g. <img ng-src="{{store.product.full}}" /> where full is a property of each gem
+        that is a path to an image file
+       -->
+    </div>
+    </div>
+
+  </body>
+</html>
